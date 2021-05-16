@@ -1,0 +1,376 @@
+@font-face
+{
+  font-family: 'roboto';
+  src: url('/fonts/roboto.ttf') format('truetype');
+  font-display: swap;
+}
+
+body
+{
+  background-image: radial-gradient(white, #E0FFFF);
+  font-family: roboto, arial, sans-serif;
+}
+
+.zoneAuth
+{
+  background-color: white;
+  width: 450px;
+  padding: 48px 40px 36px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: .2s;
+  direction: ltr;
+  font-size: 14px;
+  line-height: 1.4286;
+  box-shadow: 5px 5px 10px #A9A9A9;
+  font-family: roboto, arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+.zoneGestion
+{
+  background-color: white;
+  height: auto;
+  padding: 48px 40px 36px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: .2s;
+  direction: ltr;
+  font-size: 14px;
+  line-height: 1.4286;
+  box-shadow: 5px 5px 10px #A9A9A9;
+  font-family: roboto, arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+.champText
+{
+  border: none;
+  direction: ltr;
+  text-align: left;
+  font-size: 14px;
+  font: 400 16px Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+  background-color: transparent;
+  display: inline-block;
+  // block=Prend toute la ligne
+  height: 24px;
+  line-height: 24px;
+  margin: 0;
+  min-width: 0%;
+  outline: none;
+  // Enleve les conturs bleus
+  padding: 0;
+  z-index: 0;
+  color: #212121;
+  padding-bottom: 8px;
+  width: 200px;
+  box-sizing: border-box;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.boutonConnect
+{
+  color: white;
+  background: #4285f4;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  margin: 8px 16px 0px 16px;
+  margin-bottom: 0px;
+  padding: 10px;
+  font-family: roboto,arial,sans-serif;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 20px;
+  transition: background .2s .1s;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 4em;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  z-index: 0;
+  box-sizing: border-box;
+  transform: translateZ(0);
+  vertical-align: top;
+  width: 30%;
+  direction: ltr;
+  float: right;
+}
+
+.boutonStartStop
+{
+  color: white;
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 5%;
+  margin-left: 0;
+  font-family: roboto,arial,sans-serif;
+  white-space: nowrap;
+  line-height: 20px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 4em;
+  outline: none;
+  overflow: hidden;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.boutonStartStop[value="START"]
+{
+  background: #32CD32;
+}
+
+.boutonStartStop[value="STOP"]
+{
+  background: #B22222;
+}
+
+.boutonStartStop:disabled
+{
+  background: #C0C0C0;
+}
+
+.underline
+{
+  background-color: #4285f4;
+  display: inline-block;
+  height: 2px;
+  margin-top: -4px;
+  margin-bottom: 30px;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transition: all 0.5s linear;
+  transition: all 0.2s linear;
+  width: 200px;
+}
+
+.champText:focus+.underline
+{
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.incorrect+.underline
+{
+  background-color: #DC143C;
+  transform: scale(1);
+}
+
+.correct+.underline
+{
+  background-color: #00FA9A;
+  transform: scale(1);
+}
+  
+.champText:focus::-webkit-input-placeholder
+{
+  color: #4285F4;
+}
+
+.champText:focus::-moz-placeholder
+{
+  color: #4285F4;
+}
+
+.boutonConnect:active, .boutonStartStop:active, .boutonClean:active
+{
+  background: #000080;
+}
+
+.boutonConnect:hover
+{
+  box-shadow: 5px 5px 10px #6495ED;
+}
+
+.boutonStartStop:hover:not(:disabled), .boutonClean:hover:not(:disabled)
+{
+  box-shadow: 5px 5px 10px #A9A9A9;
+}
+
+.boutonClean
+{
+  float: right;
+  color: white;
+  background: #8470FF;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 0px;
+  padding: 10px;
+  font-family: roboto,arial,sans-serif;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 20px;
+  border: 0;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 4em;
+  outline: none;
+  overflow: hidden;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.erreurConnect
+{
+  background: #FFA07A;
+  color: white;
+  display: inline-block;
+  max-width: 20%;
+  max-height: 30%;
+  padding: 20px;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: 1s;
+  direction: ltr;
+  font-size: auto;
+  line-height: 1.4286;
+  box-shadow: 5px 5px 10px #A9A9A9;
+  font-family: roboto, arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0%;
+  position: absolute;
+  bottom: 1%;
+  cursor: pointer;
+}
+
+h1
+{
+  color: #000080;
+  font-size: 30px;
+}
+
+h2
+{
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+aside
+{
+  float: left;
+  width: 20%;
+  padding-top: 10px;
+  padding-left: 10px;
+  background-color: #ADD8E6;
+  margin-top: 10px;
+  margin-right: 20px;
+  box-shadow: 5px 5px 10px #A9A9A9;
+  margin-bottom: 20px;
+}
+
+ul
+{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e7e7e7;
+  background-color: #f3f3f3;
+  box-shadow: 5px 5px 10px #A9A9A9;
+}
+
+li
+{
+  float: left;
+}
+
+li a
+{
+  display: block;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover
+{
+  background-color: #ddd;
+}
+
+.containerRadioCam
+{
+  display: inline-block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  margin-right: 15%;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.containerRadioCam input
+{
+  display: none;
+}
+
+.checkmarkRadioCam
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.containerRadioCam:hover input ~ .checkmarkRadioCam
+{
+  background-color: #ccc;
+}
+  
+.containerRadioCam input:checked ~ .checkmarkRadioCam
+{
+  background-color: #2196F3;
+}
+    
+.checkmarkRadioCam:after
+{
+  content: "";
+  position: absolute;
+  display: none;
+}
+          
+.containerRadioCam input:checked ~ .checkmarkRadioCam:after
+{
+  display: inline-block;
+}
+            
+.containerRadioCam .checkmarkRadioCam:after
+{
+  top: 6px;
+  left: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: white;
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="fr-FR" />
+    <meta charset="utf-8" />
+    <meta name="robots" content="none" />
+    <meta name="description" content="Page de connexion au service de vid&eacute;osurveillance de la maison" />
+    <meta name="keywords" content="vid&eacute;osurveillance, maison, s&eacute;curit&eacute;" />
+    <meta name="author" content="Thomas" />
+    <meta name="copyright" content="none" />
+    <meta name="theme-color" content="#e0ffff" />
+    <title>Connexion au portail</title>
+    <link rel="stylesheet" media="screen and (min-width: 1081px)" href="/style/style.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-width: 1080px)" href="/style/mstyle.css" type="text/css" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+</head>
+<body>
+<section class="zoneAuth">
+    <h1>Connexion</h1>
+    <h2>Acc&eacute;der &agrave; l'interface de gestion</h2>
+    <form name="formConnect" action="/auth" method="post" onsubmit="return validateForm();">
+        <input type="text" name="login" placeholder="Identifiant" autocomplete="off" value="" class="champText" id="champLogin" />
+        <span class="underline"></span>
+        <input type="password" name="password" placeholder="Mot de passe" autocomplete="off" class="champText" />
+        <span class="underline"></span>
+        <!-- <input type="hidden" name="token" id="token" value="4882776941dad60a8d4950b50e46168075e0b64d4ae4d89b4912636cb51cfaf1" /> -->
+        <p><input type="submit" value="Connexion" class="boutonConnect" /></p>
+    </form>
+
+</section>
+<div class="erreurConnect" id="erreurConnect" title="Cliquer pour masquer"></div>
+<script>
+    var erreur="";
+    var erreurConnect=document.getElementById('erreurConnect');
+    if (erreur==="")
+    {
+        erreurConnect.style.display="none";
+    }
+    else
+    {
+        erreurConnect.style.display = "inline-block";
+        erreurConnect.innerHTML = erreur;
+    }
+</script>
+<script src="script/script.js" async defer></script>
+</body>
+
+</html>
