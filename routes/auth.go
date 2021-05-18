@@ -21,7 +21,12 @@ func AuthRoute(r *gin.Engine) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
 	scanner := bufio.NewScanner(file)
 	users := make(map[string]string)
 	for scanner.Scan() {
@@ -60,7 +65,10 @@ func AuthRoute(r *gin.Engine) {
 		}
 		session := sessions.Default(c)
 		session.Set("connected", true)
-		session.Save()
+		err := session.Save()
+		if err != nil {
+			log.Fatal(err)
+		}
 		c.Redirect(http.StatusFound, "/surv")
 	})
 }

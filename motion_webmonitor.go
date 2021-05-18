@@ -14,33 +14,12 @@ func main() {
 	r.Static("/script", "public/script")
 	r.Static("/style", "public/style")
 	r.Static("/fonts", "public/fonts")
-	store := cookie.NewStore([]byte("secret"))
-	r.Use(sessions.Sessions("mysession", store))
-	r.GET("/ping", func(c *gin.Context) {
-		session := sessions.Default(c)
-		if session.Get("connected") == true {
-			c.JSON(200, gin.H{
-				"message": "connected !",
-			})
-		} else {
-			c.JSON(200, gin.H{
-				"message": "pong",
-			})
-		}
-	})
-	/*r.GET("/auth", func(c *gin.Context) {
-		session := sessions.Default(c)
-		session.Set("connected", true)
-		session.Save()
-		c.Redirect(302, "/ping")
-	})*/
-	r.GET("/disconnect", func(c *gin.Context) {
-		session := sessions.Default(c)
-		session.Clear()
-		session.Save()
-		c.Redirect(302, "/ping")
-	})
+	store := cookie.NewStore([]byte("secret")) // TODO: replace by randomly secure string
+	r.Use(sessions.Sessions("motion_webmonitor_session", store))
 	routes.IndexRoute(r)
 	routes.AuthRoute(r)
+	routes.DisconnectRoute(r)
+	routes.CameraRoute(r)
+	routes.SurvRoute(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

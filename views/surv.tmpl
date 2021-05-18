@@ -1,0 +1,107 @@
+
+<!doctype html>
+
+<html lang="fr">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Language" content="fr-FR" />
+    <meta charset="utf-8">
+    <meta name="robots" content="none" />
+    <meta name="description" content="Page de gestion du service de vid&eacute;osurveillance de la maison" />
+    <meta name="keywords" content="vid&eacute;osurveillance, maison, s&eacute;curit&eacute;" />
+    <meta name="author" content="Thomas" />
+    <meta name="copyright" content="none" />
+    <meta name="theme-color" content="#e0ffff" />
+    <title>Surveillance de la maison</title>
+    <link rel="stylesheet" media="screen and (min-width: 1081px)" href="/style/style.css" type="text/css" />
+    <link rel="stylesheet" media="screen and (max-width: 1080px)" href="/style/mstyle.css" type="text/css" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+</head>
+<body>
+<header>
+    <h1>Surveillance</h1>
+    <h2>Portail de gestion de la video-surveillance &agrave; distance de la maison</h2>
+</header>
+<nav>
+    <ul>
+        <li><a href="/surv">Surveillance en direct</a></li>
+        <li><a rel="prefetch" href="/surv/files.php">Images/vid&eacute;os sauvegard&eacute;es</a></li>
+        <li><a href="/disconnect" title="Ferme la session et retourne sur la page d'accueil">D&eacute;connexion</a></li>
+    </ul>
+</nav>
+<aside>
+    <u>&Eacute;tat:</u>
+    Motion est d&eacutemarr&eacute;<button onclick="startStopMotion('?action=stop&tokenstartstop=e5d678f5bc7075a25251e480df8a20c2e253b29982977d95351b2aba4912a9c1');" id="buttonStartStop" class="boutonStartStop" value="STOP">STOP</button>
+</aside>
+<section class="zoneGestion">
+    <h1>Surveillance en direct</h1>
+    <div class="zoneChoixCamera">
+        <label class="containerRadioCam">Cam&eacute;ra 1
+            <input type="radio" name="radioChoixCam" id="radioChoixCam1" onchange="changeRadioCam();">
+            <span class="checkmarkRadioCam"></span>
+        </label>
+        <label class="containerRadioCam">Cam&eacute;ra 2
+            <input type="radio" name="radioChoixCam" id="radioChoixCam2" onchange="changeRadioCam();">
+            <span class="checkmarkRadioCam"></span>
+        </label>
+    </div>
+    <img src="/camera/1" title="Surveillance en direct" alt="Camera de surveillance en direct (streaming)" class="imgStream" id="imgStream" loading="lazy" />
+</section>
+<script>
+    var radioChoixCam1=document.getElementById('radioChoixCam1'), radioChoixCam2=document.getElementById('radioChoixCam2');
+    var imgStream=document.getElementById('imgStream');
+    if(sessionStorage.getItem('camSelected')==2)
+    {
+        radioChoixCam2.checked=true;
+    }
+    else
+    {
+        radioChoixCam1.checked=true;
+    }
+    changeRadioCam();
+    function changeRadioCam()
+    {
+        if(radioChoixCam1.checked)
+        {
+            imgStream.src="/camera/1";
+            sessionStorage.setItem('camSelected', '1');
+        }
+        else if(radioChoixCam2.checked)
+        {
+            imgStream.src="/camera/2";
+            sessionStorage.setItem('camSelected', '2');
+        }
+    }
+</script>
+</body>
+<script>
+    var buttonStartStop=document.getElementById('buttonStartStop');
+    var imgStream=document.getElementById('imgStream');
+
+    function startStopMotion(param)
+    {
+        buttonStartStop.disabled=true;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function()
+        {
+            if (this.readyState == 4 && this.status == 200)
+            {
+                if(this.responseText != "")
+                {
+                    alert(this.responseText);
+                    buttonStartStop.disabled=false;
+                }
+                else
+                {
+                    setTimeout(function()
+                    {
+                        location.reload();
+                    }, 1000);
+                }
+            }
+        };
+        xhttp.open("GET", "/surv/startstopmotion.php"+param, true);
+        xhttp.send();
+    }
+</script>
+</html>
