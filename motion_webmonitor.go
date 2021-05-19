@@ -21,5 +21,6 @@ func main() {
 	routes.DisconnectRoute(r)
 	routes.CameraRoute(r)
 	routes.SurvRoute(r)
+	routes.SavedFilesRouter(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

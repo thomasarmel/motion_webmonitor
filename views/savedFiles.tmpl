@@ -1,0 +1,7 @@
+{{ template "managementHeader" .}}
+<section class="zoneGestion">
+    {{range .listFilenames}}
+        <a href="fileview?file={{.}}" target="_blank">{{.}}</a><br />
+    {{end}}
+</section>
+{{ template "managementFooter" .}}

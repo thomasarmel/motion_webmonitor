@@ -37,6 +37,15 @@ func CameraRoute(r *gin.Engine) {
 			req.URL.Host = remote.Host
 			req.URL.Path = c.Param("proxyPath")
 		}
+
+		proxy.ErrorHandler = func(writer http.ResponseWriter, request *http.Request, err error) {
+			c.Header("Cache-Control", "no-cache, private")
+			c.Header("Expires", "0")
+			c.Header("Max-Age", "0")
+			c.Header("Pragma", "no-cache")
+			c.File("public/images/cannotconnectmotion.jpg")
+			c.Done()
+		}
 		proxy.ServeHTTP(c.Writer, c.Request)
 
 	})
