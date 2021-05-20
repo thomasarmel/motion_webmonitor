@@ -9,7 +9,7 @@ import (
 func SurvRoute(r *gin.Engine) {
 	r.GET("/surv", func(c *gin.Context) {
 		session := sessions.Default(c)
-		if session.Get("connected") != true {
+		if session.Get("connected") != true { // TODO: everywhere
 			c.Redirect(http.StatusFound, "/")
 			return
 		}
