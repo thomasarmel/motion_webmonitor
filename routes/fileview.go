@@ -1,8 +1,9 @@
-package main
+package routes
 
 import (
 	"github.com/gin-gonic/gin"
 	"log"
+	"main/fileserving"
 	"net/http"
 	"path/filepath"
 )
@@ -24,6 +25,6 @@ func FileViewRoute(r *gin.Engine) {
 			return
 		}
 		pathToFile := "D:\\docs\\films\\" + filename
-		ServeVideo(c, pathToFile)
+		fileserving.ServeVideo(c, pathToFile)
 	})
 }

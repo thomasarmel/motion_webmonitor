@@ -1,4 +1,4 @@
-package main
+package fileserving
 
 import (
 	"github.com/gabriel-vasile/mimetype"
