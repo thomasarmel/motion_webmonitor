@@ -4,7 +4,6 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
-	"routes/routes"
 )
 
 func main() {
@@ -16,12 +15,12 @@ func main() {
 	r.Static("/fonts", "public/fonts")
 	store := cookie.NewStore([]byte("secret")) // TODO: replace by randomly secure string
 	r.Use(sessions.Sessions("motion_webmonitor_session", store))
-	routes.IndexRoute(r)
-	routes.AuthRoute(r)
-	routes.DisconnectRoute(r)
-	routes.CameraRoute(r)
-	routes.SurvRoute(r)
-	routes.SavedFilesRouter(r)
-	routes.FileViewRoute(r)
+	IndexRoute(r)
+	AuthRoute(r)
+	DisconnectRoute(r)
+	CameraRoute(r)
+	SurvRoute(r)
+	SavedFilesRouter(r)
+	FileViewRoute(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }

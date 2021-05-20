@@ -1,4 +1,4 @@
-module routes
+module main
 
 go 1.15
 
