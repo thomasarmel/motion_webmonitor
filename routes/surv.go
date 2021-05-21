@@ -9,8 +9,8 @@ import (
 func SurvRoute(r *gin.Engine) {
 	r.GET("/surv", func(c *gin.Context) {
 		session := sessions.Default(c)
-		if session.Get("connected") != true { // TODO: everywhere
-			c.Redirect(http.StatusFound, "/")
+		if session.Get("connected") != true {
+			c.Redirect(http.StatusFound, "/?e=2")
 			return
 		}
 		c.HTML(http.StatusOK, "surv.tmpl", nil)

@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
@@ -12,6 +13,11 @@ func SavedFilesRouter(r *gin.Engine) {
 	var listFilenames []string
 	imagesLocationDir := "D:\\docs\\films"
 	r.GET("/savedfiles", func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get("connected") != true {
+			c.Redirect(http.StatusFound, "/?e=2")
+			return
+		}
 		listFilenames = nil
 		files, err := ioutil.ReadDir(imagesLocationDir)
 		if err != nil {

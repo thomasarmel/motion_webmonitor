@@ -1,9 +1,10 @@
 package routes
 
 import (
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"log"
-	"main/fileserving"
+	"motion_webmonitor/fileserving"
 	"net/http"
 	"path/filepath"
 )
@@ -15,6 +16,11 @@ func FileViewRoute(r *gin.Engine) {
 				log.Println("panic occurred:", err)
 			}
 		}()
+		session := sessions.Default(c)
+		if session.Get("connected") != true {
+			c.Redirect(http.StatusFound, "/?e=2")
+			return
+		}
 		filename, paramExists := c.GetQuery("file")
 		if !paramExists {
 			c.String(http.StatusBadRequest, "Please specify a file param.")
