@@ -6,8 +6,6 @@ The objective is therefore to make it possible to use a "normal" web interface i
 ### How to install ?
 
 ```
-go get -u github.com/gin-gonic/gin
-go get github.com/gin-contrib/sessions
-go build .
+go build
 ./motion_webmonitor
 ```

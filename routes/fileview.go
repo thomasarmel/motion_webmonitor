@@ -4,8 +4,10 @@ import (
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"log"
+	"motion_webmonitor/configread"
 	"motion_webmonitor/fileserving"
 	"net/http"
+	"path"
 	"path/filepath"
 )
 
@@ -26,11 +28,11 @@ func FileViewRoute(r *gin.Engine) {
 			c.String(http.StatusBadRequest, "Please specify a file param.")
 			return
 		}
-		if filepath.Ext(filename) != ".mp4" || filename[0] == '.' {
+		if !configread.Contains(configread.ImagesVideosAuthorizedExtensions, filepath.Ext(filename)) || filename[0] == '.' {
 			c.String(http.StatusUnauthorized, "Incorrect file format.")
 			return
 		}
-		pathToFile := "D:\\docs\\films\\" + filename
+		pathToFile := path.Join(configread.ImagesVideosDir, filename)
 		fileserving.ServeVideo(c, pathToFile)
 	})
 }

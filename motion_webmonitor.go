@@ -5,9 +5,11 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"motion_webmonitor/routes"
+	"runtime"
 )
 
 func main() {
+	runtime.GOMAXPROCS(runtime.NumCPU())
 	r := gin.Default()
 	r.LoadHTMLGlob("views/*")
 	r.Static("/images", "public/images")

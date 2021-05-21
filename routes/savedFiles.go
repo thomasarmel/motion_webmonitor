@@ -5,13 +5,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
+	"motion_webmonitor/configread"
 	"net/http"
 	"path/filepath"
 )
 
 func SavedFilesRouter(r *gin.Engine) {
 	var listFilenames []string
-	imagesLocationDir := "D:\\docs\\films"
 	r.GET("/savedfiles", func(c *gin.Context) {
 		session := sessions.Default(c)
 		if session.Get("connected") != true {
@@ -19,12 +19,12 @@ func SavedFilesRouter(r *gin.Engine) {
 			return
 		}
 		listFilenames = nil
-		files, err := ioutil.ReadDir(imagesLocationDir)
+		files, err := ioutil.ReadDir(configread.ImagesVideosDir)
 		if err != nil {
 			log.Fatal(err)
 		}
 		for _, f := range files {
-			if filepath.Ext(f.Name()) == ".mp4" {
+			if configread.Contains(configread.ImagesVideosAuthorizedExtensions, filepath.Ext(f.Name())) {
 				listFilenames = append(listFilenames, f.Name())
 			}
 		}

@@ -2,15 +2,45 @@
 <section class="zoneGestion">
     <h1>Surveillance en direct</h1>
     <div class="zoneChoixCamera">
-        <label class="containerRadioCam">Cam&eacute;ra 1
-            <input type="radio" name="radioChoixCam" id="radioChoixCam1" onchange="changeRadioCam();">
-            <span class="checkmarkRadioCam"></span>
-        </label>
-        <label class="containerRadioCam">Cam&eacute;ra 2
-            <input type="radio" name="radioChoixCam" id="radioChoixCam2" onchange="changeRadioCam();">
-            <span class="checkmarkRadioCam"></span>
-        </label>
+        {{- range $id := .numCams }}
+            <label class="containerRadioCam">Camera {{ $id }}
+                <input type="radio" name="radioChoiceCam">
+                <span class="checkmarkRadioCam"></span>
+            </label>
+        {{- end }}
     </div>
-    <img src="/camera/1" title="Surveillance en direct" alt="Camera de surveillance en direct (streaming)" class="imgStream" id="imgStream" loading="lazy" />
+    <img src="/camera/0" title="Surveillance en direct" alt="Camera de surveillance en direct (streaming)"
+         class="imgStream" id="imgStream" loading="lazy"/>
 </section>
+<script>
+    const imgStream = document.getElementById('imgStream');
+    const radioChoiceCam = document.getElementsByName('radioChoiceCam');
+    let previousSelectedCamera = 0;
+    function changeRadioCam(id) {
+        imgStream.src = "/camera/" + id;
+    }
+    function defineRadioCamCallbacks() {
+        radioChoiceCam.forEach(function (radio, i) {
+            radio.checked = (i == previousSelectedCamera);
+            radio.onchange = function () {
+                changeRadioCam(i);
+                sessionStorage.setItem('camSelected', i);
+            }
+        });
+    }
+    function checkPreviousSelectedCamSessionStorage() {
+        let prev = sessionStorage.getItem('camSelected');
+        if (prev === null) {
+            return;
+        }
+        prev = parseInt(prev);
+        if(prev < 0 || prev > radioChoiceCam.length) {
+            return;
+        }
+        previousSelectedCamera = prev;
+        changeRadioCam(previousSelectedCamera);
+    }
+    checkPreviousSelectedCamSessionStorage();
+    defineRadioCamCallbacks();
+</script>
 {{ template "managementFooter" .}}

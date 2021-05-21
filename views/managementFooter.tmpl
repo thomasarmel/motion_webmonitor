@@ -1,29 +1,7 @@
 {{define "managementFooter"}}
-    <script>
-        var radioChoixCam1 = document.getElementById('radioChoixCam1'),
-            radioChoixCam2 = document.getElementById('radioChoixCam2');
-        var imgStream = document.getElementById('imgStream');
-        if (sessionStorage.getItem('camSelected') == 2) {
-            radioChoixCam2.checked = true;
-        } else {
-            radioChoixCam1.checked = true;
-        }
-        changeRadioCam();
-
-        function changeRadioCam() {
-            if (radioChoixCam1.checked) {
-                imgStream.src = "/camera/1";
-                sessionStorage.setItem('camSelected', '1');
-            } else if (radioChoixCam2.checked) {
-                imgStream.src = "/camera/2";
-                sessionStorage.setItem('camSelected', '2');
-            }
-        }
-    </script>
     </body>
     <script>
         var buttonStartStop = document.getElementById('buttonStartStop');
-        var imgStream = document.getElementById('imgStream');
 
         function startStopMotion(param) {
             buttonStartStop.disabled = true;
