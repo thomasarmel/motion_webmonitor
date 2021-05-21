@@ -1,223 +1,197 @@
-@font-face
-{
-  font-family: 'roboto';
-  src: url('/fonts/roboto.ttf') format('truetype');
-  font-display: swap;
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/roboto.ttf') format('truetype');
+    font-display: swap;
 }
 
-body
-{
-  background-color: #e0ffff;
-  font-family: roboto, arial, sans-serif;
+body {
+    background-color: #e0ffff;
+    font-family: roboto, arial, sans-serif;
 }
 
-.zoneAuth, .zoneGestion
-{
-  background-color: white;
-  box-sizing: border-box;
-  overflow: hidden;
-  font-size: 40px;
-  line-height: 1.4286;
-  font-family: roboto, arial, sans-serif;
-  padding: 5%;
-  margin: none;
+.zoneAuth, .zoneGestion {
+    background-color: white;
+    box-sizing: border-box;
+    overflow: hidden;
+    font-size: 40px;
+    line-height: 1.4286;
+    font-family: roboto, arial, sans-serif;
+    padding: 5%;
+    margin: none;
 }
 
-aside
-{
-  padding: 10px;
-  padding-bottom: 50px;
-  background-color: #ADD8E6;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 40px;
-  height: auto;
+aside {
+    padding: 10px;
+    padding-bottom: 50px;
+    background-color: #ADD8E6;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    height: auto;
 }
 
-.champText
-{
-  width: 75%;
-  padding: 20px;
-  margin-top: 10%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  resize: vertical;
-  font-size: 40px;
-  font-family: roboto, arial, sans-serif;
+.champText {
+    width: 75%;
+    padding: 20px;
+    margin-top: 10%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    font-size: 40px;
+    font-family: roboto, arial, sans-serif;
 }
 
-.boutonConnect
-{
-  color: white;
-  background: #4285f4;
-  text-align: center;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding: 5%;
-  margin-top: 10%;
-  font-family: roboto,arial,sans-serif;
-  font-size: 40px;
-  white-space: nowrap;
-  line-height: 50px;
-  border: 0;
+.boutonConnect {
+    color: white;
+    background: #4285f4;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 5%;
+    margin-top: 10%;
+    font-family: roboto, arial, sans-serif;
+    font-size: 40px;
+    white-space: nowrap;
+    line-height: 50px;
+    border: 0;
 }
 
-.imgStream
-{
-  width: 100%;
-  height: auto;
+.imgStream {
+    width: 100%;
+    height: auto;
 }
 
-.boutonStartStop
-{
-  float: right;
-  color: white;
-  text-align: center;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding: 2%;
-  margin-right: 2%;
-  font-family: roboto,arial,sans-serif;
-  font-size: 40px;
-  white-space: nowrap;
-  line-height: 50px;
-  border: 0;
+.boutonStartStop {
+    float: right;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 2%;
+    margin-right: 2%;
+    font-family: roboto, arial, sans-serif;
+    font-size: 40px;
+    white-space: nowrap;
+    line-height: 50px;
+    border: 0;
 }
 
-.boutonClean
-{
-  color: white;
-  background: #8470FF;
-  display: block;
-  margin-bottom: 50px;
-  text-align: center;
-  text-transform: uppercase;
-  border-radius: 3px;
-  padding: 2%;
-  font-family: roboto,arial,sans-serif;
-  font-size: 40px;
-  white-space: nowrap;
-  line-height: 50px;
-  border: 0;
+.boutonClean {
+    color: white;
+    background: #8470FF;
+    display: block;
+    margin-bottom: 50px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 2%;
+    font-family: roboto, arial, sans-serif;
+    font-size: 40px;
+    white-space: nowrap;
+    line-height: 50px;
+    border: 0;
 }
 
-.boutonStartStop[value="START"]
-{
-  background: #32CD32;
+.boutonStartStop[value="START"] {
+    background: #32CD32;
 }
 
-.boutonStartStop[value="STOP"]
-{
-  background: #B22222;
+.boutonStartStop[value="STOP"] {
+    background: #B22222;
 }
 
-.boutonStartStop:disabled, .boutonClean:disabled
-{
-  background: #C0C0C0;
+.boutonStartStop:disabled, .boutonClean:disabled {
+    background: #C0C0C0;
 }
 
-h1
-{
-  color: #000080;
-  font-size: 60px;
-}
-    
-h2
-{
-  font-size: 50px;
+h1 {
+    color: #000080;
+    font-size: 60px;
 }
 
-.erreurConnect
-{
-  background: #FFA07A;
-  color: white;
-  padding: 5%;
-  font-size: 40px;
-  font-family: roboto, arial, sans-serif;
-  margin-top: 2%;
+h2 {
+    font-size: 50px;
 }
 
-ul
-{
-  list-style-type: none;
-  overflow: hidden;
-  border: 2px solid #e7e7e7;
-  background-color: #f3f3f3;
+.erreurConnect {
+    background: #FFA07A;
+    color: white;
+    padding: 5%;
+    font-size: 40px;
+    font-family: roboto, arial, sans-serif;
+    margin-top: 2%;
 }
 
-li a
-{
-  display: block;
-  color: #666;
-  padding: 14px 16px;
-  text-decoration: none;
+ul {
+    list-style-type: none;
+    overflow: hidden;
+    border: 2px solid #e7e7e7;
+    background-color: #f3f3f3;
 }
 
-li a:active
-{
-  color: white;
-  background-color: #666;
+li a {
+    display: block;
+    color: #666;
+    padding: 14px 16px;
+    text-decoration: none;
 }
 
-.containerRadioCam
-{
-  display: block;
-  position: relative;
-  padding-left: 60px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+li a:active {
+    color: white;
+    background-color: #666;
 }
 
-.containerRadioCam input
-{
-  display: none;
+.containerRadioCam {
+    display: block;
+    position: relative;
+    padding-left: 60px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-.checkmarkRadioCam
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 50px;
-  width: 50px;
-  background-color: #eee;
-  border-radius: 50%;
+.containerRadioCam input {
+    display: none;
 }
 
-.containerRadioCam:hover input ~ .checkmarkRadioCam
-{
-  background-color: #ccc;
+.checkmarkRadioCam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 50px;
+    background-color: #eee;
+    border-radius: 50%;
 }
 
-.containerRadioCam input:checked ~ .checkmarkRadioCam
-{
-  background-color: #2196F3;
+.containerRadioCam:hover input ~ .checkmarkRadioCam {
+    background-color: #ccc;
 }
 
-.checkmarkRadioCam:after
-{
-  content: "";
-  position: absolute;
-  display: none;
+.containerRadioCam input:checked ~ .checkmarkRadioCam {
+    background-color: #2196F3;
 }
 
-.containerRadioCam input:checked ~ .checkmarkRadioCam:after
-{
-  display: block;
+.checkmarkRadioCam:after {
+    content: "";
+    position: absolute;
+    display: none;
 }
 
-.containerRadioCam .checkmarkRadioCam:after
-{
-  top: 13px;
-  left: 13px;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: white;
+.containerRadioCam input:checked ~ .checkmarkRadioCam:after {
+    display: block;
+}
+
+.containerRadioCam .checkmarkRadioCam:after {
+    top: 13px;
+    left: 13px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: white;
 }

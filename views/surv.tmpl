@@ -16,9 +16,11 @@
     const imgStream = document.getElementById('imgStream');
     const radioChoiceCam = document.getElementsByName('radioChoiceCam');
     let previousSelectedCamera = 0;
+
     function changeRadioCam(id) {
         imgStream.src = "/camera/" + id;
     }
+
     function defineRadioCamCallbacks() {
         radioChoiceCam.forEach(function (radio, i) {
             radio.checked = (i == previousSelectedCamera);
@@ -28,18 +30,20 @@
             }
         });
     }
+
     function checkPreviousSelectedCamSessionStorage() {
         let prev = sessionStorage.getItem('camSelected');
         if (prev === null) {
             return;
         }
         prev = parseInt(prev);
-        if(prev < 0 || prev > radioChoiceCam.length) {
+        if (prev < 0 || prev > radioChoiceCam.length) {
             return;
         }
         previousSelectedCamera = prev;
         changeRadioCam(previousSelectedCamera);
     }
+
     checkPreviousSelectedCamSessionStorage();
     defineRadioCamCallbacks();
 </script>
