@@ -67,7 +67,8 @@ func AuthRoute(r *gin.Engine) {
 		session.Set("connected", true)
 		err := session.Save()
 		if err != nil {
-			log.Fatal(err)
+			c.Redirect(http.StatusFound, "/?e=3")
+			return
 		}
 		c.Redirect(http.StatusFound, "/surv")
 	})

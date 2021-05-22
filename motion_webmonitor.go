@@ -6,18 +6,20 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"log"
+	"motion_webmonitor/configread"
 	"motion_webmonitor/routes"
+	"path"
 	"runtime"
 )
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	r := gin.Default()
-	r.LoadHTMLGlob("views/*")
-	r.Static("/images", "public/images")
-	r.Static("/script", "public/script")
-	r.Static("/style", "public/style")
-	r.Static("/fonts", "public/fonts")
+	r.LoadHTMLGlob(path.Join(configread.ViewsDir, "*"))
+	r.Static("/images", path.Join(configread.PublicDir, "images"))
+	r.Static("/script", path.Join(configread.PublicDir, "script"))
+	r.Static("/style", path.Join(configread.PublicDir, "style"))
+	r.Static("/fonts", path.Join(configread.PublicDir, "fonts"))
 	sessionKey, err := generateSessionKey(64)
 	if err != nil {
 		log.Fatal("Can't generate session key.")
@@ -31,6 +33,7 @@ func main() {
 	routes.SurvRoute(r)
 	routes.SavedFilesRouter(r)
 	routes.FileViewRoute(r)
+	routes.CleanFilesRouter(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
 
