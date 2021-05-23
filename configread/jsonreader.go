@@ -12,6 +12,9 @@ var ImagesVideosDir string
 var ImagesVideosAuthorizedExtensions []string
 var CamerasURLs []string
 var ViewsDir, PublicDir string
+var CommandsStartStopMotion [5]string
+var TLSMode bool
+var ServerDomain string
 
 func init() {
 	ImagesVideosAuthorizedExtensions = append(ImagesVideosAuthorizedExtensions, ".mp4", ".mkv")
@@ -23,6 +26,15 @@ func init() {
 	}
 	ViewsDir = path.Join(executableDir, "views/")
 	PublicDir = path.Join(executableDir, "public/")
+	{
+		CommandsStartStopMotion[0] = "service motion start"
+		CommandsStartStopMotion[1] = "service motion stop"
+		CommandsStartStopMotion[2] = "systemctl check motion"
+		CommandsStartStopMotion[3] = "active"
+		CommandsStartStopMotion[4] = "inactive"
+	}
+	TLSMode = false
+	ServerDomain = "www.example.com"
 	checkConfig()
 }
 

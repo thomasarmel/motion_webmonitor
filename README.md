@@ -9,8 +9,8 @@ This software should be able to manage other IP cameras than just Raspberry Pi w
 ### How to install ?
 
 ```
-go build
-./motion_webmonitor
+go build -ldflags "-s -w"
+sudo ./motion_webmonitor
 ```
 Next create a .passwd file respecting the following format:
 

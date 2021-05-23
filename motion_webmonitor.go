@@ -34,6 +34,7 @@ func main() {
 	routes.SavedFilesRouter(r)
 	routes.FileViewRoute(r)
 	routes.CleanFilesRouter(r)
+	routes.StartStopMotionRoute(r)
 	r.Run() // listen and serve on 0.0.0.0:8080
 }
 
