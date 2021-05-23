@@ -1,6 +1,8 @@
 package configread
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"log"
 	"net/url"
 	"os"
@@ -15,6 +17,7 @@ var ViewsDir, PublicDir string
 var CommandsStartStopMotion [5]string
 var TLSMode bool
 var ServerDomain string
+var NotSecureModePort uint16
 
 func init() {
 	ImagesVideosAuthorizedExtensions = append(ImagesVideosAuthorizedExtensions, ".mp4", ".mkv")
@@ -35,15 +38,33 @@ func init() {
 	}
 	TLSMode = false
 	ServerDomain = "www.example.com"
-	checkConfig()
+	NotSecureModePort = 8080
 }
 
 func ParseConfigFile(configFile string) {
-	//
+	jsonFile, err := os.Open(configFile)
+	if err != nil {
+		log.Fatal("Can't open config file: " + configFile)
+	}
+	defer jsonFile.Close()
+	jsonByteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		log.Fatal("Can't read config file: " + configFile)
+	}
+	var conf config
+	if err := json.Unmarshal(jsonByteValue, &conf); err != nil {
+		log.Fatal("Error parsing config file " + configFile + ": " + err.Error())
+	}
+	ImagesVideosDir = conf.ImagesDir
+	ImagesVideosAuthorizedExtensions = conf.AuthorizedExtensions
+	CamerasURLs = conf.Cameras
+	CommandsStartStopMotion = conf.Commands
+	NotSecureModePort = conf.NotSecureModePort
+	CheckConfig()
 }
 
-func checkConfig() {
-	if _, err := os.Stat(ImagesVideosDir); err != nil {
+func CheckConfig() {
+	if _, err := os.Stat(ImagesVideosDir); ImagesVideosDir != "" && err != nil {
 		log.Fatal("Can't access directory " + ImagesVideosDir)
 	}
 	for _, cameraURL := range CamerasURLs {
@@ -56,4 +77,12 @@ func checkConfig() {
 			log.Fatal("Can't access file " + requiredViewFile)
 		}
 	}
+}
+
+type config struct {
+	ImagesDir            string    `json:"imagesdir"`
+	AuthorizedExtensions []string  `json:"authorizedextensions"`
+	Cameras              []string  `json:"cameras"`
+	Commands             [5]string `json:"commands"`
+	NotSecureModePort    uint16    `json:"notsecuremodeport"`
 }

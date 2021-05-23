@@ -26,15 +26,12 @@
         <ul>
             <li><a href="/surv">Live monitoring</a></li>
             <li><a rel="prefetch" href="/savedfiles">Saved images/videos</a></li>
-            <li><a href="/disconnect" title="Ferme la session et retourne sur la page d'accueil">Disconnect</a>
+            <li><a href="/disconnect" title="Close the session and go back on the main page">Disconnect</a>
             </li>
         </ul>
     </nav>
     <aside>
         Motion service state: <span id="stateMotionServiceText">Unknown</span>
-        <button
-                onclick="startStopMotion('?action=stop&tokenstartstop=e5d678f5bc7075a25251e480df8a20c2e253b29982977d95351b2aba4912a9c1');"
-                id="buttonStartStop" class="boutonStartStop" value="STOP">START
-        </button>
+        <button id="buttonStartStop" class="boutonStartStop" value="STOP">START</button>
     </aside>
 {{end}}

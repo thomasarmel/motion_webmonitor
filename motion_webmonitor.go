@@ -8,11 +8,18 @@ import (
 	"log"
 	"motion_webmonitor/configread"
 	"motion_webmonitor/routes"
+	"os"
 	"path"
 	"runtime"
+	"strconv"
 )
 
 func main() {
+	if len(os.Args) > 1 {
+		configread.ParseConfigFile(os.Args[1])
+	} else {
+		configread.CheckConfig()
+	}
 	runtime.GOMAXPROCS(runtime.NumCPU())
 	r := gin.Default()
 	r.LoadHTMLGlob(path.Join(configread.ViewsDir, "*"))
@@ -35,7 +42,7 @@ func main() {
 	routes.FileViewRoute(r)
 	routes.CleanFilesRouter(r)
 	routes.StartStopMotionRoute(r)
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.Run(":" + strconv.Itoa(int(configread.NotSecureModePort)))
 }
 
 func generateSessionKey(size uint) ([]byte, error) {
