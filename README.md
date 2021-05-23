@@ -20,3 +20,33 @@ Chmod it correctly the file in order to prevent unwanted modifications.
 go build -ldflags "-s -w"
 sudo ./motion_webmonitor
 ```
+
+#### Config file
+
+Write a JSON configuration file like
+
+```
+{
+  "imagesdir" : "/var/lib/motion",
+  "authorizedextensions" : [
+    ".mp4",
+    ".mkv"
+  ],
+  "cameras" : [
+    "http://192.168.1.10:3000/",
+    "http://192.168.1.11:3000/"
+  ],
+  "commands" : [
+    "service motion start",
+    "service motion stop",
+    "systemctl check motion",
+    "active",
+    "inactive"
+  ],
+  "notsecuremodeport" : 8080,
+  "tls": true,
+  "domains": ["www.example.com"]
+}
+```
+
+And run the program: `sudo ./motion_webmonitor config.json`
