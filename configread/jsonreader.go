@@ -2,6 +2,7 @@ package configread
 
 import (
 	"encoding/json"
+	"github.com/asaskevich/govalidator"
 	"io/ioutil"
 	"log"
 	"net/url"
@@ -16,7 +17,7 @@ var CamerasURLs []string
 var ViewsDir, PublicDir string
 var CommandsStartStopMotion [5]string
 var TLSMode bool
-var ServerDomain string
+var ServerDomains []string
 var NotSecureModePort uint16
 
 func init() {
@@ -37,7 +38,7 @@ func init() {
 		CommandsStartStopMotion[4] = "inactive"
 	}
 	TLSMode = false
-	ServerDomain = "www.example.com"
+	ServerDomains = append(ServerDomains, "www.example.com")
 	NotSecureModePort = 8080
 }
 
@@ -60,6 +61,8 @@ func ParseConfigFile(configFile string) {
 	CamerasURLs = conf.Cameras
 	CommandsStartStopMotion = conf.Commands
 	NotSecureModePort = conf.NotSecureModePort
+	TLSMode = conf.TLS
+	ServerDomains = conf.Domains
 	CheckConfig()
 }
 
@@ -77,6 +80,18 @@ func CheckConfig() {
 			log.Fatal("Can't access file " + requiredViewFile)
 		}
 	}
+	if ServerDomains != nil {
+		for _, serverDomain := range ServerDomains {
+			if !govalidator.IsDNSName(serverDomain) {
+				log.Fatal(serverDomain + " is not a valid domain name")
+			}
+		}
+	} else if TLSMode {
+		log.Fatal("At least one domain is required for TLS mode.")
+	}
+	if !TLSMode && NotSecureModePort == 0 {
+		log.Fatal("You need to specify a port if you don't use TLS.")
+	}
 }
 
 type config struct {
@@ -85,4 +100,6 @@ type config struct {
 	Cameras              []string  `json:"cameras"`
 	Commands             [5]string `json:"commands"`
 	NotSecureModePort    uint16    `json:"notsecuremodeport"`
+	TLS                  bool      `json:"tls"`
+	Domains              []string  `json:"domains"`
 }

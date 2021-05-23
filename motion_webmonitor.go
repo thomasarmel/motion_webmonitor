@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
+	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
 	"log"
 	"motion_webmonitor/configread"
@@ -42,7 +43,11 @@ func main() {
 	routes.FileViewRoute(r)
 	routes.CleanFilesRouter(r)
 	routes.StartStopMotionRoute(r)
-	r.Run(":" + strconv.Itoa(int(configread.NotSecureModePort)))
+	if configread.TLSMode {
+		log.Fatal(autotls.Run(r, configread.ServerDomains...))
+	} else {
+		r.Run(":" + strconv.Itoa(int(configread.NotSecureModePort)))
+	}
 }
 
 func generateSessionKey(size uint) ([]byte, error) {
