@@ -5,34 +5,43 @@
         const stateMotionServiceText = document.getElementById('stateMotionServiceText');
         let currentMotionState = 0; // 0 = Unknown, 1 = started, 2 = stopped
         window.onload = checkMotionServiceState;
+        buttonStartStop.onclick = startStopMotion;
 
-        function startStopMotion(param) {
+        function startStopMotion() {
+            action="start";
+            if(currentMotionState === 1) {
+                action="stop";
+            }
             buttonStartStop.disabled = true;
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    if (this.responseText != "") {
-                        alert(this.responseText);
-                        buttonStartStop.disabled = false;
-                    } else {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {
                         setTimeout(function () {
                             location.reload();
                         }, 1000);
+                    } else {
+                        alert(this.responseText);
+                        buttonStartStop.disabled = false;
                     }
                 }
             };
-            xhttp.open("GET", "/surv/startstopmotion.php" + param, true);
+            xhttp.open("GET", "/startstopmotion?action="+action, true);
             xhttp.send();
         }
 
         function checkMotionServiceState() {
             let xhttp = new XMLHttpRequest();
             stateMotionServiceText.innerHTML = "Unknown";
+            buttonStartStop.innerHTML = "START";
+            buttonStartStop.value = "START";
             currentMotionState = 0;
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText == "active") {
                         stateMotionServiceText.innerHTML = "Active";
+                        buttonStartStop.innerHTML = "STOP";
+                        buttonStartStop.value = "STOP";
                         currentMotionState = 1;
                     } else if(this.responseText == "inactive") {
                         stateMotionServiceText.innerHTML = "Inactive";

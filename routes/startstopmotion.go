@@ -39,15 +39,15 @@ func StartStopMotionRoute(r *gin.Engine) {
 }
 
 func startStopMotion(start bool, c *gin.Context) {
-	if configread.CommandsStartStopMotion[3] == "" || configread.CommandsStartStopMotion[4] == "" {
+	if configread.CommandsStartStopMotion[0] == "" || configread.CommandsStartStopMotion[1] == "" {
 		c.String(http.StatusNotImplemented, "Not implemented.")
 		return
 	}
 	var cmdSplitted []string
 	if start {
-		cmdSplitted = strings.Split(configread.CommandsStartStopMotion[3], " ")
+		cmdSplitted = strings.Split(configread.CommandsStartStopMotion[0], " ")
 	} else {
-		cmdSplitted = strings.Split(configread.CommandsStartStopMotion[4], " ")
+		cmdSplitted = strings.Split(configread.CommandsStartStopMotion[1], " ")
 	}
 	cmd := exec.Command(cmdSplitted[0], cmdSplitted[1:]...)
 	_, err := cmd.CombinedOutput()
