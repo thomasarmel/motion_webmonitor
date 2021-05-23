@@ -12,7 +12,7 @@
         <meta name="author" content="Thomas"/>
         <meta name="copyright" content="none"/>
         <meta name="theme-color" content="#e0ffff"/>
-        <title>Surveillance de la maison</title>
+        <title>House monitoring</title>
         <link rel="stylesheet" media="screen and (min-width: 1081px)" href="/style/style.css" type="text/css"/>
         <link rel="stylesheet" media="screen and (max-width: 1080px)" href="/style/mstyle.css" type="text/css"/>
         <link rel="icon" type="image/png" href="/images/favicon.png"/>
@@ -24,15 +24,15 @@
     </header>
     <nav>
         <ul>
-            <li><a href="/surv">Surveillance en direct</a></li>
-            <li><a rel="prefetch" href="/savedfiles">Images/vid&eacute;os sauvegard&eacute;es</a></li>
-            <li><a href="/disconnect" title="Ferme la session et retourne sur la page d'accueil">D&eacute;connexion</a>
+            <li><a href="/surv">Live monitoring</a></li>
+            <li><a rel="prefetch" href="/savedfiles">Saved images/videos</a></li>
+            <li><a href="/disconnect" title="Ferme la session et retourne sur la page d'accueil">Disconnect</a>
             </li>
         </ul>
     </nav>
     <aside>
-        <u>&Eacute;tat:</u>
-        Motion est d&eacutemarr&eacute;<button
+        Motion service state: <span id="stateMotionServiceText">Unknown</span>
+        <button
                 onclick="startStopMotion('?action=stop&tokenstartstop=e5d678f5bc7075a25251e480df8a20c2e253b29982977d95351b2aba4912a9c1');"
                 id="buttonStartStop" class="boutonStartStop" value="STOP">STOP
         </button>

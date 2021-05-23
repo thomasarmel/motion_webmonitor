@@ -1,6 +1,6 @@
 {{ template "managementHeader" .}}
 <section class="zoneGestion">
-    <h1>Surveillance en direct</h1>
+    <h1>Live monitoring</h1>
     <div class="zoneChoixCamera">
         {{- range $id := .numCams }}
             <label class="containerRadioCam">Camera {{ $id }}
@@ -9,7 +9,7 @@
             </label>
         {{- end }}
     </div>
-    <img src="/camera/0" title="Surveillance en direct" alt="Camera de surveillance en direct (streaming)"
+    <img src="/camera/0" title="Live monitoring" alt="Live monitoring camera (streaming)"
          class="imgStream" id="imgStream" loading="lazy"/>
 </section>
 <script>
