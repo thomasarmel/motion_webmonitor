@@ -9,6 +9,7 @@ import (
 	"log"
 	"motion_webmonitor/configread"
 	"motion_webmonitor/routes"
+	"net/http"
 	"os"
 	"path"
 	"runtime"
@@ -33,6 +34,13 @@ func main() {
 		log.Fatal("Can't generate session key.")
 	}
 	store := cookie.NewStore(sessionKey)
+	store.Options(sessions.Options{
+		MaxAge:   3600,
+		Secure:   configread.TLSMode,
+		HttpOnly: true,
+		Path:     "/",
+		SameSite: http.SameSiteStrictMode,
+	})
 	r.Use(sessions.Sessions("motion_webmonitor_session", store))
 	routes.IndexRoute(r)
 	routes.AuthRoute(r)
