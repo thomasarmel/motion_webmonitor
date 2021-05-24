@@ -12,6 +12,7 @@ func SurvRoute(r *gin.Engine) {
 	if len(configread.CamerasURLs) > 0 {
 		numCams = makeRange(0, len(configread.CamerasURLs)-1)
 	}
+	hasSavesDir := (configread.ImagesVideosDir != "")
 
 	r.GET("/surv", func(c *gin.Context) {
 		session := sessions.Default(c)
@@ -20,7 +21,8 @@ func SurvRoute(r *gin.Engine) {
 			return
 		}
 		c.HTML(http.StatusOK, "surv.tmpl", gin.H{
-			"numCams": numCams,
+			"numCams":     numCams,
+			"hasSavesDir": hasSavesDir,
 		})
 	})
 }

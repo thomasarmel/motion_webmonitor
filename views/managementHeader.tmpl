@@ -25,7 +25,9 @@
     <nav>
         <ul>
             <li><a href="/surv">Live monitoring</a></li>
-            <li><a rel="prefetch" href="/savedfiles">Saved images/videos</a></li>
+            {{ if .hasSavesDir }}
+                <li><a rel="prefetch" href="/savedfiles">Saved images/videos</a></li>
+            {{end}}
             <li><a href="/disconnect" title="Close the session and go back on the main page">Disconnect</a>
             </li>
         </ul>

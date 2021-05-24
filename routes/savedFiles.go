@@ -44,6 +44,7 @@ func SavedFilesRouter(r *gin.Engine) {
 		c.HTML(http.StatusOK, "savedFiles.tmpl", gin.H{
 			"listFilenames":   listFilenames,
 			"cleanFilesToken": cleanFilesToken,
+			"hasSavesDir":     true,
 		})
 	})
 }
