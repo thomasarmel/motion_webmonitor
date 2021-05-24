@@ -8,9 +8,9 @@
         buttonStartStop.onclick = startStopMotion;
 
         function startStopMotion() {
-            action="start";
-            if(currentMotionState === 1) {
-                action="stop";
+            action = "start";
+            if (currentMotionState === 1) {
+                action = "stop";
             }
             buttonStartStop.disabled = true;
             let xhttp = new XMLHttpRequest();
@@ -26,7 +26,7 @@
                     }
                 }
             };
-            xhttp.open("GET", "/startstopmotion?action="+action, true);
+            xhttp.open("GET", "/startstopmotion?action=" + action, true);
             xhttp.send();
         }
 
@@ -43,7 +43,7 @@
                         buttonStartStop.innerHTML = "STOP";
                         buttonStartStop.value = "STOP";
                         currentMotionState = 1;
-                    } else if(this.responseText == "inactive") {
+                    } else if (this.responseText == "inactive") {
                         stateMotionServiceText.innerHTML = "Inactive";
                         currentMotionState = 2;
                     }
