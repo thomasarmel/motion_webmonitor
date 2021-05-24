@@ -46,7 +46,8 @@ Write a JSON configuration file like
   ],
   "notsecuremodeport" : 8080,
   "tls": true,
-  "domains": ["www.example.com"]
+  "domains": ["www.example.com"],
+  "passwordfile" : "/path/to/.passwd"
 }
 ```
 

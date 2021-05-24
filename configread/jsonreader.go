@@ -2,6 +2,7 @@ package configread
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/asaskevich/govalidator"
 	"io/ioutil"
 	"log"
@@ -19,6 +20,7 @@ var CommandsStartStopMotion [5]string
 var TLSMode bool
 var ServerDomains []string
 var NotSecureModePort uint16
+var PasswordFile string
 
 func init() {
 	ImagesVideosAuthorizedExtensions = append(ImagesVideosAuthorizedExtensions, ".mp4", ".mkv")
@@ -40,6 +42,7 @@ func init() {
 	TLSMode = false
 	ServerDomains = append(ServerDomains, "www.example.com")
 	NotSecureModePort = 8080
+	PasswordFile = path.Join(executableDir, ".passwd")
 }
 
 func ParseConfigFile(configFile string) {
@@ -63,6 +66,8 @@ func ParseConfigFile(configFile string) {
 	NotSecureModePort = conf.NotSecureModePort
 	TLSMode = conf.TLS
 	ServerDomains = conf.Domains
+	PasswordFile = conf.PasswordFile
+	fmt.Println(PasswordFile)
 	CheckConfig()
 }
 
@@ -90,7 +95,10 @@ func CheckConfig() {
 		log.Fatal("At least one domain is required for TLS mode.")
 	}
 	if !TLSMode && NotSecureModePort == 0 {
-		log.Fatal("You need to specify a port if you don't use TLS.")
+		log.Fatal("You have to specify a port if you don't use TLS.")
+	}
+	if _, err := os.Stat(PasswordFile); err != nil || PasswordFile == "" {
+		log.Fatal("You have to specify an accessible password file")
 	}
 }
 
@@ -102,4 +110,5 @@ type config struct {
 	NotSecureModePort    uint16    `json:"notsecuremodeport"`
 	TLS                  bool      `json:"tls"`
 	Domains              []string  `json:"domains"`
+	PasswordFile         string    `json:"passwordfile"`
 }

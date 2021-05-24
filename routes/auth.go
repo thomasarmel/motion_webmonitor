@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"motion_webmonitor/configread"
 	"net/http"
 	"os"
 	"strings"
@@ -17,7 +18,7 @@ func checkPasswordHash(password, hash string) bool {
 }
 
 func AuthRoute(r *gin.Engine) {
-	file, err := os.Open(".passwd")
+	file, err := os.Open(configread.PasswordFile)
 	if err != nil {
 		log.Fatal(err)
 	}
