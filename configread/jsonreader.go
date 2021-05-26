@@ -2,7 +2,6 @@ package configread
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/asaskevich/govalidator"
 	"io/ioutil"
 	"log"
@@ -24,7 +23,7 @@ var PasswordFile string
 
 func init() {
 	ImagesVideosAuthorizedExtensions = append(ImagesVideosAuthorizedExtensions, ".mp4", ".mkv")
-	ImagesVideosDir = "C:\\Users\\thoma\\Desktop\\videos"
+	ImagesVideosDir = "/var/lib/motion"
 	CamerasURLs = append(CamerasURLs, "http://192.168.1.20:1941/", "http://192.168.1.25:1941/")
 	executableDir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
@@ -67,7 +66,6 @@ func ParseConfigFile(configFile string) {
 	TLSMode = conf.TLS
 	ServerDomains = conf.Domains
 	PasswordFile = conf.PasswordFile
-	fmt.Println(PasswordFile)
 	CheckConfig()
 }
 

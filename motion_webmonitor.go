@@ -52,7 +52,13 @@ func main() {
 	routes.CleanFilesRouter(r)
 	routes.StartStopMotionRoute(r)
 	if configread.TLSMode {
+		redirect := gin.Default()
+		redirect.GET("/", func(c *gin.Context) {
+			c.Redirect(http.StatusMovedPermanently, "https://"+configread.ServerDomains[0])
+		})
+		go redirect.Run(":80")
 		log.Fatal(autotls.Run(r, configread.ServerDomains...))
+
 	} else {
 		r.Run(":" + strconv.Itoa(int(configread.NotSecureModePort)))
 	}
