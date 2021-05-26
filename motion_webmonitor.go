@@ -53,8 +53,8 @@ func main() {
 	routes.StartStopMotionRoute(r)
 	if configread.TLSMode {
 		redirect := gin.Default()
-		redirect.GET("/", func(c *gin.Context) {
-			c.Redirect(http.StatusMovedPermanently, "https://"+configread.ServerDomains[0])
+		redirect.GET("/*any", func(c *gin.Context) {
+			c.Redirect(http.StatusMovedPermanently, "https://"+configread.ServerDomains[0]+c.Request.RequestURI)
 		})
 		go redirect.Run(":80")
 		log.Fatal(autotls.Run(r, configread.ServerDomains...))
