@@ -2,10 +2,12 @@ package main
 
 import (
 	"crypto/rand"
+	"crypto/tls"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/autotls"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/acme/autocert"
 	"log"
 	"motion_webmonitor/configread"
 	"motion_webmonitor/routes"
@@ -23,6 +25,7 @@ func main() {
 		configread.CheckConfig()
 	}
 	runtime.GOMAXPROCS(runtime.NumCPU())
+	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 	r.LoadHTMLGlob(path.Join(configread.ViewsDir, "*"))
 	r.Static("/images", path.Join(configread.PublicDir, "images"))
@@ -52,12 +55,26 @@ func main() {
 	routes.CleanFilesRouter(r)
 	routes.StartStopMotionRoute(r)
 	if configread.TLSMode {
-		redirect := gin.Default()
-		redirect.GET("/*any", func(c *gin.Context) {
-			c.Redirect(http.StatusMovedPermanently, "https://"+configread.ServerDomains[0]+c.Request.RequestURI)
-		})
-		go redirect.Run(":80")
-		log.Fatal(autotls.Run(r, configread.ServerDomains...))
+		cfg := tls.Config{
+			MinVersion:               tls.VersionTLS12,
+			CurvePreferences:         []tls.CurveID{tls.CurveP521, tls.CurveP384, tls.CurveP256},
+			PreferServerCipherSuites: true,
+			CipherSuites: []uint16{
+				tls.TLS_CHACHA20_POLY1305_SHA256,
+				tls.TLS_AES_128_GCM_SHA256,
+				tls.TLS_AES_256_GCM_SHA384,
+				tls.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+				tls.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+				//tls.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+				tls.TLS_RSA_WITH_AES_256_GCM_SHA384,
+				//tls.TLS_RSA_WITH_AES_256_CBC_SHA,
+			},
+		}
+		m := autocert.Manager{
+			Prompt:     autocert.AcceptTOS,
+			HostPolicy: autocert.HostWhitelist(configread.ServerDomains...),
+		}
+		log.Fatal(autotls.RunWithManagerAndTLSConfig(r, &m, cfg))
 
 	} else {
 		r.Run(":" + strconv.Itoa(int(configread.NotSecureModePort)))
