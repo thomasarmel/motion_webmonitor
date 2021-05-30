@@ -20,9 +20,22 @@ func SurvRoute(r *gin.Engine) {
 			c.Redirect(http.StatusFound, "/?e=2")
 			return
 		}
+		startStopMotionToken, e := generateRandomString(32)
+		if e != nil {
+			c.String(http.StatusExpectationFailed, "Can't generate clean files token.")
+			return
+		}
+
+		session.Set("startstopmotiontoken", startStopMotionToken)
+		err := session.Save()
+		if err != nil {
+			c.String(http.StatusExpectationFailed, "Can't save clean files token on session.")
+			return
+		}
 		c.HTML(http.StatusOK, "surv.tmpl", gin.H{
-			"numCams":     numCams,
-			"hasSavesDir": hasSavesDir,
+			"numCams":              numCams,
+			"startstopmotiontoken": startStopMotionToken,
+			"hasSavesDir":          hasSavesDir,
 		})
 	})
 }

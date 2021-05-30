@@ -16,6 +16,15 @@ func StartStopMotionRoute(r *gin.Engine) {
 			c.Redirect(http.StatusFound, "/?e=2")
 			return
 		}
+		token, hasToken := c.GetQuery("token")
+		if !hasToken {
+			c.String(http.StatusBadRequest, "Please specify a token for this request.")
+			return
+		}
+		if token != session.Get("startstopmotiontoken") {
+			c.String(http.StatusForbidden, "Bad security token.")
+			return
+		}
 		action, hasAction := c.GetQuery("action")
 		if !hasAction {
 			c.String(http.StatusBadRequest, "Please specify an action param.")

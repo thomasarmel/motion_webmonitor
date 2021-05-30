@@ -3,6 +3,7 @@
     <script>
         const buttonStartStop = document.getElementById('buttonStartStop');
         const stateMotionServiceText = document.getElementById('stateMotionServiceText');
+        const startStopMotionToken = "{{ .startstopmotiontoken }}";
         let currentMotionState = 0; // 0 = Unknown, 1 = started, 2 = stopped
         window.onload = checkMotionServiceState;
         buttonStartStop.onclick = startStopMotion;
@@ -26,7 +27,7 @@
                     }
                 }
             };
-            xhttp.open("GET", "/startstopmotion?action=" + action, true);
+            xhttp.open("GET", "/startstopmotion?action=" + action + "&token=" + startStopMotionToken, true);
             xhttp.send();
         }
 
@@ -49,7 +50,7 @@
                     }
                 }
             };
-            xhttp.open("GET", "/startstopmotion?action=check", true);
+            xhttp.open("GET", "/startstopmotion?action=check&token=" + startStopMotionToken, true);
             xhttp.send();
         }
     </script>

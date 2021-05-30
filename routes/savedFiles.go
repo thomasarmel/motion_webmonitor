@@ -1,11 +1,9 @@
 package routes
 
 import (
-	"crypto/rand"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
-	"math/big"
 	"motion_webmonitor/configread"
 	"net/http"
 	"path/filepath"
@@ -35,30 +33,23 @@ func SavedFilesRouter(r *gin.Engine) {
 			c.String(http.StatusExpectationFailed, "Can't generate clean files token.")
 			return
 		}
+		startStopMotionToken, e := generateRandomString(32)
+		if e != nil {
+			c.String(http.StatusExpectationFailed, "Can't generate clean files token.")
+			return
+		}
 		session.Set("cleanfilestoken", cleanFilesToken)
+		session.Set("startstopmotiontoken", startStopMotionToken)
 		err = session.Save()
 		if err != nil {
 			c.String(http.StatusExpectationFailed, "Can't save clean files token on session.")
 			return
 		}
 		c.HTML(http.StatusOK, "savedFiles.tmpl", gin.H{
-			"listFilenames":   listFilenames,
-			"cleanFilesToken": cleanFilesToken,
-			"hasSavesDir":     true,
+			"listFilenames":        listFilenames,
+			"cleanFilesToken":      cleanFilesToken,
+			"startstopmotiontoken": startStopMotionToken,
+			"hasSavesDir":          true,
 		})
 	})
-}
-
-func generateRandomString(n int) (string, error) {
-	const letters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-"
-	ret := make([]byte, n)
-	for i := 0; i < n; i++ {
-		num, err := rand.Int(rand.Reader, big.NewInt(int64(len(letters))))
-		if err != nil {
-			return "", err
-		}
-		ret[i] = letters[num.Int64()]
-	}
-
-	return string(ret), nil
 }
