@@ -1,6 +1,6 @@
 {{ template "managementHeader" .}}
-<section class="zoneGestion">
-    <button id="buttonClean" class="boutonClean">Clean all</button>
+<section class="zoneManagement">
+    <button id="buttonClean" class="buttonClean">Clean all</button>
     <div id="allLinksImagesZone">
         {{range .listFilenames}}
             <a href="fileview?file={{.}}" target="_blank">{{.}}</a><br/>{{end}}

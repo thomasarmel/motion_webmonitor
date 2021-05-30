@@ -28,7 +28,7 @@ body {
     margin-top: 5%;
 }
 
-.zoneGestion {
+.zoneManagement {
     background-color: white;
     height: auto;
     padding: 48px 40px 36px;
@@ -70,7 +70,7 @@ body {
     white-space: normal;
 }
 
-.boutonConnect {
+.buttonConnect {
     color: white;
     background: #4285f4;
     text-align: center;
@@ -102,7 +102,7 @@ body {
     float: right;
 }
 
-.boutonStartStop {
+.buttonStartStop {
     color: white;
     display: block;
     text-align: center;
@@ -125,15 +125,15 @@ body {
     box-sizing: border-box;
 }
 
-.boutonStartStop[value="START"] {
+.buttonStartStop[value="START"] {
     background: #32CD32;
 }
 
-.boutonStartStop[value="STOP"] {
+.buttonStartStop[value="STOP"] {
     background: #B22222;
 }
 
-.boutonStartStop:disabled {
+.buttonStartStop:disabled {
     background: #C0C0C0;
 }
 
@@ -173,19 +173,19 @@ body {
     color: #4285F4;
 }
 
-.boutonConnect:active, .boutonStartStop:active, .boutonClean:active {
+.buttonConnect:active, .buttonStartStop:active, .buttonClean:active {
     background: #000080;
 }
 
-.boutonConnect:hover {
+.buttonConnect:hover {
     box-shadow: 5px 5px 10px #6495ED;
 }
 
-.boutonStartStop:hover:not(:disabled), .boutonClean:hover:not(:disabled) {
+.buttonStartStop:hover:not(:disabled), .buttonClean:hover:not(:disabled) {
     box-shadow: 5px 5px 10px #A9A9A9;
 }
 
-.boutonClean {
+.buttonClean {
     float: right;
     color: white;
     background: #8470FF;
@@ -209,7 +209,7 @@ body {
     box-sizing: border-box;
 }
 
-.erreurConnect {
+.errorConnect {
     background: #FFA07A;
     color: white;
     display: inline-block;
@@ -222,7 +222,7 @@ body {
     overflow: hidden;
     transition: 1s;
     direction: ltr;
-    font-size: auto;
+    font-size: initial;
     line-height: 1.4286;
     box-shadow: 5px 5px 10px #A9A9A9;
     font-family: roboto, arial, sans-serif;
