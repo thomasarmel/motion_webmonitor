@@ -52,3 +52,37 @@ Write a JSON configuration file like
 ```
 
 And run the program: `sudo ./motion_webmonitor config.json`
+
+### Config file explanations:
+
+**imagesdir:**
+
+Path on which motion will save videos
+
+**authorizedextensions:**
+
+File types inside `imagesdir` that will be accessible from web UI (typically `.mp4`, `.mkv`, `.jpg`...)
+
+**cameras:**
+
+URLs of MJPEG streams, user will be able to choose stream in web UI
+
+**commands:**
+
++ Command to start motion service
++ Command to stop motion service
++ Command to check if motion service is active (typically `systemctl check motion`)
++ Value returned by previous command if motion service is active (typically `active`)
++ Value returned by previous command if motion service is inactive (typically `inactive`)
+
+**notsecuremodeport:**
+
+Port on which motion_webmonitor listens in case `tls` is set to **false**. This is useful in case you plan to run motion_webmonitor behind a web proxy (nginx, caddy, apache2...)
+
+**domains:**
+
+In case you don't want to run motion_webmonitor behind a web proxy, it's able to serve through HTTPS, and so that fetches a Let's Encrypt SSL certificate. This field is used to tell Let's Encrypt the domain of the certificate (so the one you will use for your website).
+
+**passwordfile:**
+
+File containing credentials, as explained above. Format is `username:bcrypt_hashed_password`, 1 credential per line. **Don't forget to chmod the file correctly**
